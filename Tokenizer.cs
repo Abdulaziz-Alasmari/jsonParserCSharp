@@ -32,8 +32,16 @@ namespace JsonParserCSharp
             Token token = this.tokenize();
             List<Token> tokens = new();
 
+            string openings = "[{";
+            Stack<string> openingsStack = new();
+
             if (token != null)
+            {
+                if (openings.Contains(token.Value))
+                    openingsStack.Push(token.Value);
+
                 tokens.Add(token);
+            }
 
             while (token != null)
             {
@@ -41,8 +49,19 @@ namespace JsonParserCSharp
                 token = this.tokenize();
 
                 if(token != null)
+                {
+                    if (openings.Contains(token.Value))
+                        openingsStack.Push(token.Value);
+
+                    if (openingsStack.Peek() == token.Value)
+                        openingsStack.Pop();
+
                     tokens.Add(token);
+                }
             }
+
+            if (openingsStack.Count != 0)
+                throw new Exception("Unexpected token");
 
             return tokens;
         }
