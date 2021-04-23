@@ -83,9 +83,10 @@ namespace JsonParserCSharp
             return this;
         }
         public Input reset() { return this; }
+
         public char peek(int numOfSteps = 1)
         {
-            if (this.hasMore()) return this.input[this.NextPosition];
+            if (this.hasMore(numOfSteps)) return this.input[this.Position + numOfSteps];
             return '\0';
         }
         public string loop(InputCondition condition)
