@@ -8,7 +8,8 @@ namespace JsonParserCSharp
         public List<Token> tokens;
         public bool enableHistory;
         public Input input;
-        
+        private string openings = "[{";
+
         public Tokenizable[] handlers; public Tokenizer(string source, Tokenizable[] handlers)
         {
             this.input = new Input(source);
@@ -32,7 +33,6 @@ namespace JsonParserCSharp
             Token token = this.tokenize();
             List<Token> tokens = new();
 
-            string openings = "[{";
             Stack<string> openingsStack = new();
 
             if (token != null)
