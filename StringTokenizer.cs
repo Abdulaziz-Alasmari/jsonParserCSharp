@@ -17,10 +17,7 @@ namespace JsonParserCSharp
 
         public bool isString(Input input)
         {
-            if (!input.hasMore(2) && input.peek() != '"')
-                throw new Exception("Unexpected token");
-
-            if (input.peek() == '"' && input.Character != '\\' && !valid.Contains(input.peek(2)))
+            if ((!input.hasMore(2) && input.peek() != '"') || input.peek() == '"' && input.Character != '\\' && !valid.Contains(input.peek(2)))
                 throw new Exception("Unexpected token");
 
             return input.Character != '"';
