@@ -1,13 +1,13 @@
 using System;
 namespace JsonParserCSharp
 {
-
-        public class Input
+    public class Input
     {
         private readonly string input;
         private readonly int length;
         private int position;
         private int lineNumber;
+
         //Properties        
         public int Length
         {
@@ -45,6 +45,9 @@ namespace JsonParserCSharp
                 else return '\0';
             }
         }
+
+        public delegate bool InputCondition(Input input);
+
         public Input(string input)
         {
             this.input = input;
@@ -52,16 +55,19 @@ namespace JsonParserCSharp
             this.position = -1;
             this.lineNumber = 1;
         }
+        
         public bool hasMore(int numOfSteps = 1)
         {
             if (numOfSteps <= 0) throw new Exception("Invalid number of steps");
             return (this.position + numOfSteps) < this.length;
         }
+        
         public bool hasLess(int numOfSteps = 1)
         {
             if (numOfSteps <= 0) throw new Exception("Invalid number of steps");
             return (this.position - numOfSteps) > -1;
         }        //callback -> delegate
+        
         public Input step(int numOfSteps = 1)
         {
             if (this.hasMore(numOfSteps))
@@ -72,6 +78,7 @@ namespace JsonParserCSharp
             }
             return this;
         }
+        
         public Input back(int numOfSteps = 1)
         {
             if (this.hasLess(numOfSteps))
@@ -82,6 +89,7 @@ namespace JsonParserCSharp
             }
             return this;
         }
+        
         public Input reset() { return this; }
 
         public char peek(int numOfSteps = 1)
@@ -89,6 +97,7 @@ namespace JsonParserCSharp
             if (this.hasMore(numOfSteps)) return this.input[this.Position + numOfSteps];
             return '\0';
         }
+        
         public string loop(InputCondition condition)
         {
             string buffer = "";
