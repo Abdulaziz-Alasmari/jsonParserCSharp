@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JsonParserCSharp
 {
     public class NumberTokenizer : Tokenizable
     {
         private static int countDot = 0;
-        
+
 
         public override bool tokenizable(Tokenizer t)
         {
             countDot = 0;
-            
+
             return Char.IsDigit(t.input.peek()) || t.input.peek() == '-';
         }
 
@@ -44,7 +40,7 @@ namespace JsonParserCSharp
 
 
 
-            
+
 
             return Char.IsDigit(currentCharacter) || currentCharacter == '.' || checkExponent || input.peek() == '-' || input.peek() == '+';
         }
@@ -54,18 +50,36 @@ namespace JsonParserCSharp
             Token token = new Token(t.input.Position, t.input.LineNumber,
                 "number", t.input.loop(isDigit));
 
-            
-            if(token.Value[0]== '0' && token.Value.Length > 1 && (token.Value[1] != '.'))
-             {
-                throw new Exception("invalid value");
-             }
-            else
+            if(token.Value.Length == 3 && token.Value[0] == '-' && char.IsDigit(token.Value[1]) && token.Value[2] == '.')
             {
-                return token;
+                throw new Exception("invalid value");
             }
-            
+            else if (token.Value[0] == '0' && token.Value.Length > 1)
+            {
+                if (token.Value[1] != '.')
+                {
+                    throw new Exception("invalid value");
+                }
 
-            
+            }
+            else if (token.Value[0] == '-' && token.Value[1] == '0' && token.Value.Length > 2)
+            {
+                if (token.Value[2] != '.')
+                {
+                    throw new Exception("invalid value");
+                }
+            }
+            else if (token.Value.Length > 1)
+            {
+                if (char.IsDigit(token.Value[0]) && token.Value[1] == '.' && token.Value.Length < 3)
+                    throw new Exception("invalid value");
+            }
+
+            return token;
+
+
+
+
         }
     }
 }
