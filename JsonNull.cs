@@ -1,7 +1,7 @@
-﻿namespace Tokenizer
+﻿namespace JsonParserCSharp
 {
     public class JsonNull : TokenValue
     {
-        public bool value { get; set; }
+        public string value { get; set; }
     }
 }
