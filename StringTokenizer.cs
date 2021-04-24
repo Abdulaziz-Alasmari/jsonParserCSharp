@@ -9,7 +9,6 @@ namespace JsonParserCSharp
     class StringTokenizer : Tokenizable
     {
         private static int count = 0;
-        private string valid = ",:]}";
 
         public override bool tokenizable(Tokenizer tokenizer)
         {
@@ -20,12 +19,8 @@ namespace JsonParserCSharp
         public bool isString(Input input)
         {
             count++;
-            // "delete"
 
-            bool endWithoutClosing = !input.hasMore(2) && input.peek() != '"';
-            bool nextTokenInvalid = input.peek() == '"' && input.Character != '\\' && !valid.Contains(input.peek(2));
-
-            if (input.peek() == '\n' || endWithoutClosing || nextTokenInvalid)
+            if (input.peek() == '\n' || !input.hasMore(2) && input.peek() != '"')
                 throw new Exception("Unexpected token");
 
             return count == 1 || input.Character != '"';
