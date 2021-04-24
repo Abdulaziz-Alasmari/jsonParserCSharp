@@ -20,6 +20,7 @@ namespace JsonParserCSharp
         public bool isString(Input input)
         {
             count++;
+            // "delete"
 
             bool endWithoutClosing = !input.hasMore(2) && input.peek() != '"';
             bool nextTokenInvalid = input.peek() == '"' && input.Character != '\\' && !valid.Contains(input.peek(2));
@@ -33,9 +34,17 @@ namespace JsonParserCSharp
         public override Token tokenize(Tokenizer tokenizer)
         {
             Input input = tokenizer.input;
-            char ch = input.step().Character;
+            input.step();
             Token token = new Token(input.Position, input.LineNumber, TokenType.String, input.loop(isString));
-            token.Value = ch + token.Value;
+
+            string val = "";
+
+            for(int i = 0; i < token.Value.Length - 1; i++)
+            {
+                val += token.Value[i];
+            }
+
+            token.Value = val;
 
             return token;
         }
