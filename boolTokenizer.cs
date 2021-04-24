@@ -23,7 +23,7 @@ namespace JsonParserCSharp
         public override Token tokenize(Tokenizer t)
         {
             Token token = new Token(t.input.Position, t.input.LineNumber,
-                "TrueOrFalse", t.input.loop(isTrueOrFalse).ToLower());
+                "Boolean", t.input.loop(isTrueOrFalse).ToLower());
 
             if (token.Value != "true" && token.Value != "false")
                 throw new Exception("Unexpected token");
