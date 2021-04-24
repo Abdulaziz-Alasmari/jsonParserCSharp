@@ -1,6 +1,6 @@
-﻿namespace Tokenizer
+﻿namespace JsonParserCSharp
 {
-    public class JsonString : TokenValue
+    public class JsonString : JsonValue
     {
         public string value { get; set; }
     }

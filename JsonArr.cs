@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Tokenizer
+namespace JsonParserCSharp
 {
-    public class JsonArr : First.TokenValue
+    public class JsonArr : JsonValue
     {
-        public List<First.TokenValue> arr;
+        public List<JsonValue> arr;
     }
 }

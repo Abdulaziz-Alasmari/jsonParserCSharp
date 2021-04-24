@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Tokenizer
+namespace JsonParserCSharp
 {
-    public class JsonObj: First.TokenValue
+    public class JsonObj: JsonValue
     {
-        public Dictionary<string,First.TokenValue> value { get; set; }
+        public Dictionary<string, JsonValue> value { get; set; }
     }
-
 }

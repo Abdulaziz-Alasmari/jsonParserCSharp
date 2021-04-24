@@ -1,6 +1,6 @@
 ﻿namespace JsonParserCSharp
 {
-    public class JsonNull : TokenValue
+    public class JsonNull : JsonValue
     {
         public object value
         {

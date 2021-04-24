@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace JsonParserCSharp
 {
-
     public delegate bool InputCondition(Input input); 
     public class IdTokenizer : Tokenizable
     {

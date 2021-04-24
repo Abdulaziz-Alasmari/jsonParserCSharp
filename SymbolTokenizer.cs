@@ -1,19 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace Tokenizer
+namespace JsonParserCSharp
 {
     public class SymbolTokenizer : Tokenizable
     {
-        private Char[] valid = new[] {'[','{',',',':','}',']'};
+        private static readonly Dictionary<char, string> valid = new();
+
+        static SymbolTokenizer()
+        {
+            valid.Add('{', "object");
+            valid.Add('[', "array");
+            valid.Add(',', "comma");
+            valid.Add(':', "colon");
+            valid.Add(']', "array");
+            valid.Add('}', "object");
+        }
+
         public override bool tokenizable(Tokenizer t)
         {
-            return valid.Contains(t.input.peek());
+            return valid.ContainsKey(t.input.peek());
         }
+
         public override Token tokenize(Tokenizer t)
         {
+            char ch = t.input.step().Character;
+            string type = valid.GetValueOrDefault(ch);
+
             return new Token(t.input.Position, t.input.LineNumber,
-                "Symbol", t.input.step().Character.ToString());
+                type, ch.ToString());
         }
     }
 }
