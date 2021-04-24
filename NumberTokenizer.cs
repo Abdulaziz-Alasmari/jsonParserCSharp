@@ -8,11 +8,13 @@ namespace JsonParserCSharp
 {
     public class NumberTokenizer : Tokenizable
     {
-        private static int count = 0;
+        private static int countDot = 0;
+        
 
         public override bool tokenizable(Tokenizer t)
         {
-            count = 0;
+            countDot = 0;
+            
             return Char.IsDigit(t.input.peek()) || t.input.peek() == '-';
         }
 
@@ -32,22 +34,38 @@ namespace JsonParserCSharp
                     }
                 }
             }
-
             if (currentCharacter == '.')
             {
-                count++;
+                countDot++;
 
-                if (count >= 2)
+                if (countDot++ >= 2)
                     throw new Exception("invalid value");
             }
+
+
+
+            
 
             return Char.IsDigit(currentCharacter) || currentCharacter == '.' || checkExponent || input.peek() == '-' || input.peek() == '+';
         }
 
         public override Token tokenize(Tokenizer t)
         {
-            return new Token(t.input.Position, t.input.LineNumber,
+            Token token = new Token(t.input.Position, t.input.LineNumber,
                 "number", t.input.loop(isDigit));
+
+            
+            if(token.Value[0]== '0' && token.Value.Length > 1 && (token.Value[1] != '.'))
+             {
+                throw new Exception("invalid value");
+             }
+            else
+            {
+                return token;
+            }
+            
+
+            
         }
     }
 }
