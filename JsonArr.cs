@@ -4,6 +4,6 @@ namespace JsonParserCSharp
 {
     public class JsonArr : JsonValue
     {
-        public List<JsonValue> arr;
+        public List<JsonValue> value = new List<JsonValue>();
     }
 }

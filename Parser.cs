@@ -17,9 +17,9 @@ namespace JsonParserCSharp
             Position = 0;
             currentToken = tokens[Position];
             root = null;
-            System.Console.WriteLine("Current token -> " + currentToken.Value);
-            foreach (var token in tokens)
-                Console.WriteLine("current token " + token.Type + " " + token.Value);
+            // System.Console.WriteLine("Current token -> " + currentToken.Value);
+            // foreach (var token in tokens)
+                // Console.WriteLine("Token " + token.Type + " " + token.Value);
 
         }
 
@@ -37,7 +37,10 @@ namespace JsonParserCSharp
                 currentToken = tokens[++Position];
 
             }
+            else
+            {
             currentToken = null;
+            }
         }
 
         private JsonValue getValue()
@@ -46,26 +49,27 @@ namespace JsonParserCSharp
 
             if (currentToken != null)
             {
+                System.Console.WriteLine("GET VALUE" + currentToken.Type);
                 switch (currentToken.Type)
                 {
                     case TokenType.String:
                         value = new JsonString();
-                        moveCursor();
+                        // moveCursor();
                         break;
 
                     case TokenType.Number:
                         value = new JsonNumber();
-                        moveCursor();
+                        // moveCursor();
                         break;
 
                     case TokenType.Boolean:
                         value = new JsonBool();
-                        moveCursor();
+                        // moveCursor();
                         break;
 
                     case TokenType.Null:
                         value = new JsonNull();
-                        moveCursor();
+                        // moveCursor();
                         break;
 
                     case TokenType.ObjectOpening:
@@ -113,13 +117,14 @@ namespace JsonParserCSharp
                     if (key != null)
                     {
                         moveCursor(); // move from key to colon
-
                         if (currentToken != null && currentToken.Type == TokenType.Colon)
                         {
                             moveCursor(); // move from colon to value
                             JsonValue value = getValue();
+                            System.Console.WriteLine("VALUE = "+ value);
                             obj.value.Add(key, value);
-                            moveCursor(); // mvoe from value to ',' or '}' else exception
+                            moveCursor();
+                             // mvoe from value to ',' or '}' else exception
                             if (currentToken != null && currentToken.Type == TokenType.Comma)
                             {
                                 moveCursor();
@@ -164,7 +169,7 @@ namespace JsonParserCSharp
                 while( currentToken != null)
                 {
                     value = getValue();
-                    array.arr.Add(value);
+                    array.value.Add(value);
                     moveCursor();
                     if( currentToken != null && currentToken.Type == TokenType.Comma)
                     {
