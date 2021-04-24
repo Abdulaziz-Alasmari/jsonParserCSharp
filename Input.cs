@@ -49,7 +49,9 @@ namespace JsonParserCSharp
                 else return '\0';
             }
         }
-        
+
+        public delegate bool InputCondition(Input input);
+
         public Input(string input)
         {
             this.input = input;
@@ -68,7 +70,7 @@ namespace JsonParserCSharp
         {
             if (numOfSteps <= 0) throw new Exception("Invalid number of steps");
             return (this.position - numOfSteps) > -1;
-        }        //callback -> delegate
+        }
         
         public Input step(int numOfSteps = 1)
         {
@@ -92,11 +94,16 @@ namespace JsonParserCSharp
             return this;
         }
         
-        public Input reset() { return this; }
-        
+        public Input reset()
+        {
+            this.position = -1;
+            this.lineNumber = 1;
+            return this;
+        }
+
         public char peek(int numOfSteps = 1)
         {
-            if (this.hasMore()) return this.input[this.NextPosition];
+            if (this.hasMore(numOfSteps)) return this.input[this.Position + numOfSteps];
             return '\0';
         }
         
@@ -107,6 +114,4 @@ namespace JsonParserCSharp
                 buffer += this.step().Character; return buffer;
         }
     }
-
-
 }
