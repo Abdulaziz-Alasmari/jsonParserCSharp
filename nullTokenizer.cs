@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JsonParserCSharp
 {
-    public class nullTokenizer : Tokenizable
+    public class NullTokenizer : Tokenizable
     {
         public override bool tokenizable(Tokenizer t)
         {
