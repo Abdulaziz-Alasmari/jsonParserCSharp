@@ -2,6 +2,9 @@
 {
     public class JsonNull : TokenValue
     {
-        public string value { get; set; }
+        public object value
+        {
+            get { return null; }
+        }
     }
 }
