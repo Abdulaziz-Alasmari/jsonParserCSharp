@@ -10,12 +10,12 @@ namespace JsonParserCSharp
 
         static SymbolTokenizer()
         {
-            valid.Add('{', TokenType.Object);
-            valid.Add('[', TokenType.Array);
+            valid.Add('{', TokenType.ObjectOpening);
+            valid.Add('[', TokenType.ArrayOpening);
             valid.Add(',', TokenType.Comma);
             valid.Add(':', TokenType.Colon);
-            valid.Add(']', TokenType.Array);
-            valid.Add('}', TokenType.Object);
+            valid.Add(']', TokenType.ArrayClosing);
+            valid.Add('}', TokenType.ObjectClosing);
         }
 
         public override bool tokenizable(Tokenizer t)

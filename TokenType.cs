@@ -14,6 +14,6 @@ namespace JsonParserCSharp
         valid.Add(':', "colon");
         valid.Add(']', "array");
         valid.Add('}', "object");*/
-        Object, Array, Comma, Colon, String, Boolean, Number, Null, WhiteSpace
+        ObjectOpening, ObjectClosing, ArrayOpening, ArrayClosing, Comma, Colon, String, Boolean, Number, Null, WhiteSpace
     }
 }
