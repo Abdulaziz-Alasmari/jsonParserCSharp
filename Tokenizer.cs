@@ -67,7 +67,6 @@ namespace JsonParserCSharp
                     if (openingsStack.Count > 0 && closings.Contains(token.Value))
                         openingsStack.Pop();
 
-                    Console.WriteLine(token.Value);
                     tokens.Add(token);
                 }
             }
