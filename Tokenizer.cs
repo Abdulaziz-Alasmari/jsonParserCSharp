@@ -66,6 +66,8 @@ namespace JsonParserCSharp
 
                     if (openingsStack.Count > 0 && closings.Contains(token.Value))
                         openingsStack.Pop();
+                    else if (openingsStack.Count == 0 && closings.Contains(token.Value))
+                        throw new Exception("Unexpected token");
 
                     tokens.Add(token);
                 }
