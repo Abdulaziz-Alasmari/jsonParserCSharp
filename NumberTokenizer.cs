@@ -47,7 +47,7 @@ namespace JsonParserCSharp
         public override Token tokenize(Tokenizer t)
         {
             return new Token(t.input.Position, t.input.LineNumber,
-                "number", t.input.loop(isDigit));
+                TokenType.Number, t.input.loop(isDigit));
         }
     }
 }

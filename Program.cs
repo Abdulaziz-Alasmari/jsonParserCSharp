@@ -11,6 +11,7 @@ namespace JsonParserCSharp
             // important change this to your local file path
             var input = File.ReadAllText(@"C:\Users\WinDows\source\repos\jsonParserCSharp\jsonParserCSharp\input.json");
             Console.WriteLine($"input: {input}");
+            Console.WriteLine();
 
             Tokenizer t = new Tokenizer(new Input(input), new Tokenizable[] {
                 new WhiteSpaceTokenizer(),
@@ -22,8 +23,6 @@ namespace JsonParserCSharp
             });
 
             List<Token> tokens = t.all();
-
-
 
             foreach (var token in tokens)
                 Console.WriteLine(token.Value);

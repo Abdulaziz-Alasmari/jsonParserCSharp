@@ -34,7 +34,7 @@ namespace JsonParserCSharp
         {
             Input input = tokenizer.input;
             char ch = input.step().Character;
-            Token token = new Token(input.Position, input.LineNumber, "string", input.loop(isString));
+            Token token = new Token(input.Position, input.LineNumber, TokenType.String, input.loop(isString));
             token.Value = ch + token.Value;
 
             return token;

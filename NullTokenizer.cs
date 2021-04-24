@@ -23,7 +23,7 @@ namespace JsonParserCSharp
         public override Token tokenize(Tokenizer t)
         {
             Token token = new Token(t.input.Position, t.input.LineNumber,
-                "Null", t.input.loop(isNull).ToLower());
+                TokenType.Null, t.input.loop(isNull).ToLower());
 
             if (token.Value != "null")
                 throw new Exception("invalid value");
