@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace JsonParserCSharp
 {
@@ -7,7 +8,11 @@ namespace JsonParserCSharp
     {
         static void Main(string[] args)
         {
-            Tokenizer t = new Tokenizer(new Input("{}"), new Tokenizable[] {
+            // important change this to your local file path
+            var input = File.ReadAllText(@"C:\Users\WinDows\source\repos\jsonParserCSharp\jsonParserCSharp\input.json");
+            Console.WriteLine($"input: {input}");
+
+            Tokenizer t = new Tokenizer(new Input(input), new Tokenizable[] {
                 new WhiteSpaceTokenizer(),
                 new nullTokenizer(),
                 new NumberTokenizer(),
@@ -18,9 +23,7 @@ namespace JsonParserCSharp
             List<Token> tokens = t.all();
 
             foreach(var token in tokens)
-            {
                 Console.WriteLine(token.Value);
-            }
         }
     }
 }
