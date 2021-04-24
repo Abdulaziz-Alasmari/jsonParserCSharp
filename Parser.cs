@@ -26,7 +26,7 @@ namespace JsonParserCSharp
         public JsonValue parse()
         {
             root = getValue();
-            System.Console.WriteLine(root);
+            // System.Console.WriteLine(root);
             return root;
         }
 
@@ -49,21 +49,21 @@ namespace JsonParserCSharp
 
             if (currentToken != null)
             {
-                System.Console.WriteLine("GET VALUE" + currentToken.Type);
+                // System.Console.WriteLine("GET VALUE" + currentToken.Type);
                 switch (currentToken.Type)
                 {
                     case TokenType.String:
-                        value = new JsonString();
+                        value = new JsonString(currentToken.Value);
                         // moveCursor();
                         break;
 
                     case TokenType.Number:
-                        value = new JsonNumber();
+                        value = new JsonNumber(currentToken.Value);
                         // moveCursor();
                         break;
 
                     case TokenType.Boolean:
-                        value = new JsonBool();
+                        value = new JsonBool(currentToken.Value);
                         // moveCursor();
                         break;
 
@@ -105,7 +105,7 @@ namespace JsonParserCSharp
         {
             if (currentToken.Type == TokenType.ObjectClosing) 
             {
-                moveCursor();
+                
                 return obj;
             }
             else
@@ -121,8 +121,8 @@ namespace JsonParserCSharp
                         {
                             moveCursor(); // move from colon to value
                             JsonValue value = getValue();
-                            System.Console.WriteLine("VALUE = "+ value);
-                            obj.value.Add(key, value);
+                            // System.Console.WriteLine("VALUE = "+ value);
+                            obj.Value.Add(key, value);
                             moveCursor();
                              // mvoe from value to ',' or '}' else exception
                             if (currentToken != null && currentToken.Type == TokenType.Comma)
@@ -132,7 +132,7 @@ namespace JsonParserCSharp
                             }
                             else if (currentToken != null && currentToken.Type == TokenType.ObjectClosing)
                             {
-                                moveCursor();
+                                // moveCursor();
                                 break;
                             }
                             else
@@ -160,7 +160,7 @@ namespace JsonParserCSharp
         {
             if (currentToken.Type == TokenType.ArrayClosing) 
             {
-                moveCursor();
+                
                 return array;
             }
             else
@@ -178,7 +178,7 @@ namespace JsonParserCSharp
                     }
                     else if (currentToken != null && currentToken.Type == TokenType.ArrayClosing)
                     {
-                        moveCursor();
+                        // moveCursor();
                         break;
                     }
                     else
@@ -189,6 +189,11 @@ namespace JsonParserCSharp
                 }
                 return array;
             }
+        }
+
+        public override string ToString()
+        {
+            return root.ToString();
         }
 
     }

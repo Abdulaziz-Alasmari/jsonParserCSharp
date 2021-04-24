@@ -2,6 +2,16 @@
 {
     public class JsonString : JsonValue
     {
-        public string value { get; set; }
+        public string Value { get; set; }
+
+        public JsonString( string input)
+        {
+            Value = input;
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 }

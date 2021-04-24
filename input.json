@@ -1,3 +1,9 @@
-[
-    123,false, {}
-]
+{
+  "bool": true,
+  "num": 15,
+  "str": "test",
+  "arr": [ "test", 2, true, {"x" : true} ],
+  "obj": {
+    "null": null
+  }
+}

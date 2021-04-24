@@ -26,6 +26,7 @@ namespace JsonParserCSharp
 
             Parser parser = new(tokens);
             parser.parse();
+            System.Console.WriteLine(parser.ToString());
             
             // foreach (var token in tokens)
             //     Console.WriteLine(token);

@@ -6,5 +6,10 @@
         {
             get { return null; }
         }
+
+        public override string ToString()
+        {
+            return "null";
+        }
     }
 }
