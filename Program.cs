@@ -14,9 +14,10 @@ namespace JsonParserCSharp
 
             Tokenizer t = new Tokenizer(new Input(input), new Tokenizable[] {
                 new WhiteSpaceTokenizer(),
-                new nullTokenizer(),
+                new NullTokenizer(),
                 new NumberTokenizer(),
                 new StringTokenizer(),
+                new BoolTokenizer(),
                 new SymbolTokenizer()
             });
 
