@@ -15,5 +15,10 @@ namespace JsonParserCSharp
             this.Type = type;
             this.Value = value;
         }
+
+        public override string ToString()
+        {
+            return $"\nType: {Type}\nValue: {Value}\n";
+        }
     }
 }

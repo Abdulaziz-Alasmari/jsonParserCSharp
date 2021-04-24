@@ -25,7 +25,7 @@ namespace JsonParserCSharp
             List<Token> tokens = t.all();
 
             foreach (var token in tokens)
-                Console.WriteLine(token.Value);
+                Console.WriteLine(token);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace JsonParserCSharp
         public override Token tokenize(Tokenizer t)
         {
             return new Token(t.input.Position, t.input.LineNumber,
-                "whitespace", t.input.loop(isWhiteSpace));
+                TokenType.WhiteSpace, t.input.loop(isWhiteSpace));
         }
     }
 }
