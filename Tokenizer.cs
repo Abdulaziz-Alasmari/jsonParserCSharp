@@ -26,8 +26,15 @@ namespace JsonParserCSharp
         public Token tokenize()
         {
             foreach (var handler in this.handlers)
-                if (!handler.isOptional && handler.tokenizable(this))
-                    return handler.tokenize(this);
+                if (handler.tokenizable(this))
+                {
+                    Token token = handler.tokenize(this);
+
+                    if (handler.isOptional)
+                        continue;
+
+                    return token;
+                }
             
             return null;
         }
@@ -49,7 +56,6 @@ namespace JsonParserCSharp
 
             while (token != null)
             {
-                Console.WriteLine(token.Value);
                 token = this.tokenize();
 
                 if(token != null)
