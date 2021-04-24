@@ -8,7 +8,11 @@ namespace JsonParserCSharp
         static void Main(string[] args)
         {
             Tokenizer t = new Tokenizer(new Input("{}"), new Tokenizable[] {
-                
+                new WhiteSpaceTokenizer(),
+                new nullTokenizer(),
+                new NumberTokenizer(),
+                new StringTokenizer(),
+                new SymbolTokenizer()
             });
 
             List<Token> tokens = t.all();
