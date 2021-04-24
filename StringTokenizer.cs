@@ -36,7 +36,6 @@ namespace JsonParserCSharp
             char ch = input.step().Character;
             Token token = new Token(input.Position, input.LineNumber, "type", input.loop(isString));
             token.Value = ch + token.Value;
-            Console.WriteLine(token.Value);
 
             return token;
         }

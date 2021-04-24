@@ -10,6 +10,7 @@ namespace JsonParserCSharp
         public Input input;
 
         private static readonly string openings = "[{";
+        private static readonly string closings = "}]";
 
         public Tokenizable[] handlers; public Tokenizer(string source, Tokenizable[] handlers)
         {
@@ -63,9 +64,10 @@ namespace JsonParserCSharp
                     if (openings.Contains(token.Value))
                         openingsStack.Push(token.Value);
 
-                    if (openingsStack.Peek() == token.Value)
+                    if (openingsStack.Count > 0 && closings.Contains(token.Value))
                         openingsStack.Pop();
 
+                    Console.WriteLine(token.Value);
                     tokens.Add(token);
                 }
             }
