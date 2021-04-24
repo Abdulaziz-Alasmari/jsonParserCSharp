@@ -9,7 +9,7 @@ namespace JsonParserCSharp
         static void Main(string[] args)
         {
             // important change this to your local file path
-            var input = File.ReadAllText(@"C:\Users\WinDows\source\repos\jsonParserCSharp\jsonParserCSharp\input.json");
+            var input = File.ReadAllText(@"/home/z/tuwaiq/jsonParserCSharp/input.json");
             Console.WriteLine($"input: {input}");
             Console.WriteLine();
 
@@ -24,8 +24,21 @@ namespace JsonParserCSharp
 
             List<Token> tokens = t.all();
 
-            foreach (var token in tokens)
-                Console.WriteLine(token);
+            Parser parser = new(tokens);
+            parser.parse();
+            
+            // foreach (var token in tokens)
+            //     Console.WriteLine(token);
         }
     }
 }
+
+// {
+//   "bool": true,
+//   "num": 15,
+//   "str": "test",
+//   "arr": [ "test", 2, true ],
+//   "obj": {
+//     "null": null
+//   }
+// }

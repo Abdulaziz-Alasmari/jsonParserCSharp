@@ -1,9 +1,2 @@
 {
-  "bool": true,
-  "num": 15,
-  "str": "test",
-  "arr": [ "test", 2, true ],
-  "obj": {
-    "null": null
-  }
 }
