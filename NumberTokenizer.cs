@@ -6,28 +6,20 @@ using System.Threading.Tasks;
 
 namespace JsonParserCSharp
 {
-   
-
     public class NumberTokenizer : Tokenizable
     {
-        static int count = 0;
+        private static int count = 0;
+
         public override bool tokenizable(Tokenizer t)
         {
-            bool tokenizable = Char.IsDigit(t.input.peek()) || t.input.peek() == '-';
-
-
             count = 0;
-
-            return tokenizable;
+            return Char.IsDigit(t.input.peek()) || t.input.peek() == '-';
         }
 
         static bool isDigit(Input input)
         {
-
             char currentCharacter = input.peek();
             bool checkExponent = ((currentCharacter == 'E' || currentCharacter == 'e') && (input.peek(2) == '-' || input.peek(2) == '+' || Char.IsDigit(input.peek(2))));
-
-
 
             if (currentCharacter == '-' && (input.Character != 'e'))
             {
@@ -39,7 +31,6 @@ namespace JsonParserCSharp
                         throw new Exception("invalid value");
                     }
                 }
-
             }
 
             if (currentCharacter == '.')
