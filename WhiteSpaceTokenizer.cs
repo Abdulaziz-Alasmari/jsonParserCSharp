@@ -8,6 +8,11 @@ namespace JsonParserCSharp
 {
     public class WhiteSpaceTokenizer : Tokenizable
     {
+        public WhiteSpaceTokenizer()
+        {
+            isOptional = true;
+        }
+
         public override bool tokenizable(Tokenizer t)
         {
             return Char.IsWhiteSpace(t.input.peek());

@@ -26,7 +26,10 @@ namespace JsonParserCSharp
         public Token tokenize()
         {
             foreach (var handler in this.handlers)
-                if (handler.tokenizable(this)) return handler.tokenize(this); return null;
+                if (!handler.isOptional && handler.tokenizable(this))
+                    return handler.tokenize(this);
+            
+            return null;
         }
 
         public List<Token> all()
