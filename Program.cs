@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace JsonParserCSharp
 {
-
-    public delegate bool InputCondition(Input input); 
     class Program
     {
         static void Main(string[] args)
         {
-            Tokenizer t = new Tokenizer(new Input("{}"), new Tokenizable[] {
+            var input = File.ReadAllText(@"/home/z/tuwaiq/jsonParserCSharp/input.json");
+            Console.WriteLine($"input: {input}");
+            Console.WriteLine();
 
-            }); ; Token token = t.tokenize();
-            while (token != null)
-            {
-                Console.WriteLine(token.Value);
-                token = t.tokenize();
-            }
+            Tokenizer t = new Tokenizer(new Input(input), new Tokenizable[] {
+                new WhiteSpaceTokenizer(),
+                new NullTokenizer(),
+                new NumberTokenizer(),
+                new StringTokenizer(),
+                new BoolTokenizer(),
+                new SymbolTokenizer()
+            });
+
+            List<Token> tokens = t.all();
+
+            Parser parser = new(tokens);
+            parser.parse();
+            System.Console.WriteLine(parser.ToString());
         }
     }
-
-
 }
