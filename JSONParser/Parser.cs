@@ -20,6 +20,11 @@ namespace JsonParserCSharp
         public JsonValue parse()
         {
             root = getValue();
+            nextToken();
+            if( currentToken != null)
+            {
+                throw new Exception("More than one JSON root object");
+            }
             return root;
         }
 
