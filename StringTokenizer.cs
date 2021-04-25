@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace JsonParserCSharp
 {
     class StringTokenizer : Tokenizable
@@ -34,7 +29,7 @@ namespace JsonParserCSharp
 
             string val = "";
 
-            for(int i = 0; i < token.Value.Length - 1; i++)
+            for (int i = 0; i < token.Value.Length - 1; i++)
             {
                 val += token.Value[i];
             }

@@ -1,9 +1,10 @@
 {
   "bool": true,
   "num": 15,
-  "str": "test",
-  "arr": [ "test", 2, true, {"x" : true} ],
+  "str": "te\bst",
+  "arr": [ "test", 2, true, { "x" : 234, "y" : "str"} ],
   "obj": {
-    "null": null
+    "null": null, "expo" : 123e+5
   }
+  
 }
